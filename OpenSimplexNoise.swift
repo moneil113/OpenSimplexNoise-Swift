@@ -48,11 +48,13 @@ public class OpenSimplexNoise {
         for i in 0..<256 {
             source[i] = Int16(i)
         }
-        var seed = _seed &* Int64(6364136223846793005) &+ Int64(1442695040888963407)
-        seed = seed &* Int64(6364136223846793005) &+ Int64(1442695040888963407)
-        seed = seed &* Int64(6364136223846793005) &+ Int64(1442695040888963407)
+        let a : Int64 = 6364136223846793005
+        let b : Int64 = 1442695040888963407
+        var seed = _seed &* a &+ b
+        seed = seed &* a &+ b
+        seed = seed &* a &+ b
         for i in (0..<256).reverse() {
-            seed = seed &* Int64(6364136223846793005) &+ Int64(1442695040888963407)
+            seed = seed &* a &+ b
             var r = Int((seed + 31) % (i + 1))
             if (r < 0) {
                 r += i + 1
